@@ -1,0 +1,682 @@
+<html>
+
+<head>
+<title>
+My PhD Thesis - Appendix 2 - Part 2
+</title>
+<link rel=stylesheet type="text/css" href="../formate.css">
+</head>
+
+<body>
+
+<table width=100%>
+<tr>
+<td class="pn-main-title" align="center">
+<h1>
+Development of an ontology architecture to 
+ensure semantic interoperability between communication standards in healthcare
+Appendix with additional explanations
+</h1>
+</td>
+</tr>
+
+<tr>
+<td class="deko">
+<a class="pn-norm-menu" href="../Default.htm" >Home</a>
+-&gt;
+<a class="pn-norm-menu" href="Default.htm" >Frank</a>
+-&gt;
+<a class="pn-norm-menu" href="phd-thesis.htm" >My Thesis</a>
+</td>
+</tr>
+
+<tr>
+<td width="100%" align="center" valign="middle" background="images/hor_leiste.gif">
+&nbsp;
+</td>
+</tr>
+
+</table>
+
+
+<table width = 100%>
+<tr>
+<!-- --- Navigation/Menu ----->
+ <td width="100" valign=top background="../images/block_bgleft.jpg">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="4" >
+<tr>
+<td align="center" class="pn-title">
+<!--
+OWL Files</td>
+</tr>
+<td class="bg-menu">
+<a class="pn-norm-menu" href="http://www.ifomis.de/bfo/1.1" >BFO</a>
+</td>
+</tr>
+<tr>
+<td class="bg-menu">
+<a class="pn-norm-menu" href="http://www.ifomis.de/acgt/1.0" >ACGT</a>
+</td>
+</tr>
+<tr>
+<td class="bg-menu">
+<a class="pn-norm-menu" href="http://www.ifomis.de/ro/1.0" >RO</a>
+</td>
+</tr>
+<tr>
+<td class="bg-menu">
+<a class="pn-norm-menu" href="http://www.ifomis.de/iao/1.0" >IAO</a>
+-->
+</td>
+</tr>
+
+
+</table>
+
+</td>
+
+<!----- Trennlinie -------->
+<td width="2px" bgcolor="#fcd894" background="images/hor_leiste.gold.jpg" align="center" valign="middle">
+&nbsp;
+</td>
+
+<!----- Inhalt  -------->
+<td>
+
+
+<h1>
+2. Detailed Insights
+</h1>
+<h2>
+2.1. HL7 Version 2.x - Detailed Insight
+</h2>
+<p>
+The first version of HL7 (version 1.0) was established in 1987 by agreement of several companies, to perform information exchange in a "standardized", ASTM-derived format. This approach quite quickly lead to the second Version, which was adopted 1990th. The latter was and is the basis for the family "HL7 version 2.x", which is being developed in parallel to version 3. Currently (August 2010) version 2.7 is adopted and v2.8 is under preparation with new proposals. Further versions can be expected during the next few years.
+</p>
+<p>
+Basis of this pragmatic approach using the "delimitered" exchange format for messages is to save space. At the beginning of the development work, the length of a message for the transfer was still quite debatable. 
+</p>
+<p>
+The default encoding (ER7) with the use of six hierarchically oriented separators allows the construction of structured messages. Basically, a two-dimensional approach for sharing the information content is used: 
+</p>
+
+<p align="center">
+<img src="images/app2-abb2-01.gif"><br/>
+Figure 1: Two-dimensional parsing HL7 v2.x messages
+</p>
+
+<p>
+The most significant delimiter (CR = carriage return) is separating the individual segments and thus provides the segment-oriented message structure to be able to express coherent message units. Herewith one can decide on "top level" whether an information unit (segment or segment group) can be processed or not. But the message structure must be known therefore. Conversely, within the appropriate hierarchy structure it can be identified this way, so that it can be decided directly whether processing of the segment or segment group is possible or not.
+</p>
+<p>
+Within a segment which is identified by an acronym of three letters (for example, PID = Patient IDentification), the fields carry the actual information. Once a segment is to be processed, the decoding takes place in the second dimension. Here, the individual information is extracted about 5 other delimiters.
+</p>
+<p>
+The following is an example of an admission message:
+</p>
+
+<pre>
+MSH|^~\&|MEDOS|RAD|SAP-ISH||20030120116412002||ADT^A01|1325-1|P|2.5|||||DEU|8859/1|DEU
+EVN|A01|20030120164122|20030120140000
+PID|||5432^^^KIS||Mustermann^Gabriele^^^^^L~Maier^Gabriele^^^^^B||19751017|F|||
+       Vogelweg 8&Vogelweg&8^^Hamburg-Harburg^^10260^DEU^H~
+       ^^Bochum^^^DEU^N||^PRN^PH^^49^40^3542557~^PRN^FX^^49^40^3542558|
+       ^WPN^PH^^49^40^5557865||M|CAT||||||Maria-Hilf Krh.|||DEU|Pyrotechniker|DEU
+NK1|1|Mustermann^Gerd|FTH|||||||||||M|M|19470521|||DEU|DEU|||||CAT
+NK1|2|Mustermann^Helga|MTH|||||||||||M|F|19490630|||DEU|DEU|||||CAT|Maier
+PV1|1|I|IN2^4^3^CHI^^^^6||||||||||||||||0345632^^^^VN^KIS^20030120|||||||||||||||||||||||||
+       20030120
+PV2|||||||||20030402
+OBX|2|NM|3141.9^Koerpergewicht^LN||85|kg|||||F|||20030120
+DG1|1||E11.5^...^I10-20|||BD|||||||||1.1
+DG1|2||I79.2^...^I10-20|||BD|||||||||1.2
+DG1|3||S42.41 R^...^I10-20|||BD|||||||||2.1
+DG1|4||V99^...^I10-20|||BD|||||||||2.2
+IN1|1||0463752^^NII~32453^^NIIP|Techniker Krankenkasse||||||||
+       200006|200606||1|Mustermann^Gabriele^^^^^L||19750714|
+       Vogelweg 8^^Hamburg-Harburg^^10260^DEU^H|||||
+       000000||000000|||||||||||||||||||||||1407750120^^^^^^^200006
+IN2|||||I
+ZBE|615^MEDOS|20030120140000||INSERT<cr>
+</pre>
+<p>
+Figure 2: Example HL7 v2.x message
+</p>
+<p>
+Further structuring of the message content within the message structure is defined by the data types: 
+</p>
+<h3>
+2.1.1. Data Types
+</h3>
+<p>
+The data types define the division of the fields into their components. The first version out of the v2.x family had only one simple and generic compound data type ("CM"). In the course of the development the model for the data types have been further refined. In version 2.6 there are already over 90 different data types. 
+</p>
+<p>
+Unlike programming languages, data types are defined in HL7 over its content. 
+Examples: 
+</p>
+<ul>
+<li>Addresses
+<li>Person names
+<li>Time range
+<li>etc.
+</ul>
+</p>
+<p>
+Due to the number of delimiters data types can not be structured as desired, but are limited to two levels. (The length of the field is the sum of the components plus the delimiters). Following the example of people's names is given, the two data types "FN" and "DR" are dissolved as a data type. For further details, please refer to [HL7]: 
+</p>
+<p>
+Table 1: HL7 data type specification (nesting resolved)
+</p>
+<table border=1>
+<tr bgcolor="lightgrey">
+<td>
+SEQ</td><td>LEN</td><td>DT</td><td>OPT</td><td>TBL#</td><td>COMPONENT NAME</td><td>&nbsp;
+</td>
+</tr>
+<tr>
+<td>1</td><td>194</td><td>FN</td><td>C</td><td>&nbsp;</td><td>Family Name</td>
+<td>
+<table border="1">
+<tr bgcolor="lightgrey">
+<td>
+SEQ</td><td>LEN</td><td>DT</td><td>OPT</td><td>TBL#</td><td>COMPONENT NAME
+</td>
+</tr>
+<tr>
+<td>1</td><td>50</td><td>ST</td><td>R</td><td>&nbsp;</td><td>Surname</td>
+</tr>
+<tr>
+<td>2</td><td>20</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Own Surname Prefix</td>
+</tr>
+<tr>
+<td>3</td><td>50</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Own Surname</td>
+</tr>
+<tr>
+<td>4</td><td>20</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Surname Prefix From Partner/Spouse</td>
+</tr>
+<tr>
+<td>5</td><td>50</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Surname From Partner/Spouse</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>2</td><td>30</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Given Name	
+</td>
+</tr>
+<tr>
+<td>3</td><td>30</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Second and Further Given Names or Initials Thereof	
+</td>
+</tr>
+<tr>
+<td>4</td><td>20</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Suffix (e.g., JR or III)	
+</td>
+</tr>
+<tr>
+<td>5</td><td>20</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Prefix (e.g., DR)	
+</td>
+</tr>
+<tr>
+<td>6</td><td>6</td><td>IS</td><td>B</td><td>0360</td><td>Degree (e.g., MD)	
+</td>
+</tr>
+<tr>
+<td>7</td><td>1</td><td>ID</td><td>O</td><td>0200</td><td>Name Type Code</td></td><td>
+</tr>
+<tr>
+<td>
+8</td><td>1</td><td>ID</td><td>O</td><td>0465</td><td>Name Representation Code</td><td></td>
+</tr>
+<tr>
+<td>9</td><td>705</td><td>CWE</td><td>O</td><td>0448</td><td>Name Context</td><td></td>
+</tr>
+<tr>
+<td>10</td><td>49</td><td>DR</td><td>B</td><td>&nbsp;</td><td>Name Validity Range</td><td>
+<table border=1 width="100%">
+<tr bgcolor="lightgrey">
+<td>
+SEQ</td><td>LEN</td><td>DT</td><td>OPT</td><td>TBL#</td><td>COMPONENT NAME
+</td>
+</tr>
+<tr>
+<td>
+1</td><td>24</td><td>DTM</td><td>O</td><td>&nbsp;</td><td>Range Start Date/Time
+</tr>
+<tr>
+<td>
+2</td><td>24</td><td>DTM</td><td>O</td><td>&nbsp;</td><td>Range End Date/Time
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>11</td><td>1</td><td>ID</td><td>O</td><td>0444</td><td>Name Assembly Order</td><td></td>
+</tr>
+<tr>
+<td>12</td><td>24</td><td>DTM</td><td>O</td><td>&nbsp;</td><td>Effective Date</td><td></td>
+</tr>
+<tr>
+<td>
+13</td><td>24</td><td>DTM</td><td>O</td><td>&nbsp;</td><td>Expiration Date</td><td></td>
+</tr>
+<tr>
+<td>14</td><td>199</td><td>ST</td><td>O</td><td>&nbsp;</td><td>Professional Suffix	
+</td>
+</tr>
+</table>
+<p>
+About the so-called component model, which was officially introduced with version 2.5, the textual assignments which could previously only described verbally (especially the tables, the lengths and optionalities) could be made explicit.
+</p>
+<p>
+The HL7 database included since the beginning of its existence a component model and introduced data types to describe any structure or component uniquely. To ensure compatibility with the original standard a mapping to the imprecise specifications was introduced.
+</p>
+<h3>
+2.1.2. Events
+</h3>
+<p>
+Events in the real world - for example, the admission of a patient or the creation of a new order - are the trigger to submit the relevant information to a communication partner. Depending on the scenario other data is necessary which is represented in the form of spcialised compositions of different segment (i.e. segment groups). 
+</p>
+<p>
+Originally (HL7 v2.1) one assumed to do it by the type of the message, i.e. the type of message should provide sufficient information to determine the content of the message. Details of the events were then deployed in a particular field in a subsequent segment. In ADT this was EVN-1, and ORC-1 for ORM messages. In the course of the evolution, the messages got more comprehensive and could not be built identically for all events of the same message type. For this reason, the event field was shifted into the message header. Unfortunately, the various working groups (TCs/SIGs) have implemented the situation differently. The ADT (patient administration) domain has developed many similar messages (actually three basic structures with many events), OO (Orders & Observations) has remained with ORM in a very small set of message structures, but has developed many "Subevents" in the form of "Order Control Code" (ORC-1). 
+</p>
+<p>
+The introduction of an identifier (ID) for the message structure ("Message Structure Identifier") should resolve this shortcoming. Initially, all messages were therefore compared with the help of the database to determine such an ID. Since not all messages could be simply and clearly parsed by a parser due to their internal structure (several different messages with the same event), this ID should also be consulted to support the parsing processes. 
+</p>
+<p>
+Since the standard itself is not developed based on a database [SchoOem2001], it is unfortunately often the case that not all messages with the same structure (and ID) are changed similarly, so that different structures with the same ID are presented in the ballot process. 
+</p>
+<p>
+In addition, a cleanup of the documentation can not be performed because of objections by members, because they insist on a backward compatibility. This leads to duplication in the definition, which in turn complicate a consistent definition, if not prevent it. As a remedy, there remains only the systematic collection and review of appeals during the ballot phase (see "The HL7 database" on the website). 
+</p>
+<h3>
+2.1.3. dynamic behaviour
+</h3>
+<p>
+In addition to the previously described definition of a static message structure, 
+there is still a dynamic behavior. The message header provides some relevant information thereof:
+</p>
+
+<p align="center">
+<img src="images/app2-abb2-03.gif"><br/>
+Figure 3: HL7 v2.x messages - dynamic behavior
+</p>
+
+<p>
+The condition of the acknowledgment requirement for transport and processing determines, whether a receipt should be sent and under what conditions. (If nothing is specified, the default is the default behavior is to send an application acknowledgement.) In return, an application may already expect 0, 1 or 2 response to a each message sent. In case of "broadcast" messages such as ADT, this must be multiplied by the number of recipients. This raises the problem to be solved individually, how to deal with different responses from the individual applications, for example, what to do if 2 of 8 applications refuse to process a transfer of a patient? 
+</p>
+<p>
+The currently implemented default behavior is the transmission of a transport acknowledgment, which is however not really evaluated. It only serves to fulfill the requirement to send an ack. This behaviour is again due to the wrong synchronous processing logic which is often implemented incorrectly. HL7 does not make any statements for such a behavior. 
+</p>
+<p>
+Strictly speaking, several messages can be sent before a single response may occur - if a response is requested at all. 
+</p>
+<p>
+A response message references the original message by the message ID. This ID can be of any kind, but it must be a unique string. To correctly assign/identiy errors and to correct them, an application must run a log book for all messages. Most do not, so that a consistent error monitoring in order to deliver a pro-active prevention of errors is not possible. 
+</p>
+<p>
+Another problem associated with the dynamic behavior is to forward the messages to the recipient or recipients. The HL7 standard itself does not state how the messages are to be distributed, that is, whether the application itself is responsible or not. A communication server can be entrusted with the distribution. In return, he guarantees the transfer and directly provides a transport ack. Hence, the question arises how different application acks (see above) should be handled, if e.g. one of four target systems do not process the message?
+</p>
+<p>
+Ultimately, only manual intervention will solve this problem given the administrator gets an information about it. 
+</p>
+<h3>
+2.1.4. Delete Requests
+</h3>
+<p>
+The 2.x version has only three "types of information" (see [IHE Vol.0]): 
+<p>
+<ul>
+<li>existing information
+<li>non-existing information
+<li>to delete information
+</ul>
+<p>
+The first two are relatively easy to understand: values for a field are usually sent when they are available then. Otherwise, this field stays empty/blank. 
+</p>
+<p>
+In the event that information is deleted in an application, it is envisaged this to be indicated by a special sequence. Therefore the double quotes ("") are provided. 
+</p>
+<p>
+The implementation of this behavior requires that an application recognizes and remembers that information was deleted [IHE Vol.0]. In most applications, the information will not be historicized, so that the interface can not recognize that information is no longer available. Therefore simply "no information" is transferred, leaving the target system with the old information until a new value is transmitted. 
+</p>
+<p>
+Difficulties arise when a receiver processes information from different channels, because then the sequence plays an important role. Without forwarding the information to all involved a consistency can not be guaranteed. 
+</p>
+<h3>
+2.1.5. Null-Flavors
+</h3>
+<p>
+In contrast to deletion requests HL7 version 2.x does not currently distinguish why a piece of information is not available. Since the first version an approach was made based on the table values. Thus this problem was addressed only in certain cases (tables) and in an inconsitent way. Considerations for a generic approach will be discussed with proposal 608 [HL7 V2 Prop.DB] for v2.8. But, the backward compatibility with previous versions raises issues to be analyzed in more detail. 
+</p>
+<h3>
+2.1.6. Transmission Protocols
+</h3>
+<p>
+As mentioned already ASTM [ASTM] was the basis for the work. On the one hand, improvements were introduced, such as segment names consisting of just three letters. On the other they "forgot" to define a message end ("Message trailer") segment, which leads to problems with certain communication protocols: A batch protocol to combine multiple messages into a transmission unit exists, but for pragmatic reasons (additional development) this is not supported by any company. For a file based transmission the messages are simply written subsequently into this file. When transferring a file, this requires additional safeguards (semaphore files, locking, or renaming) to ensure completeness of the messages.
+</p>
+<p>
+The easiest and most reliable mechanism here is renaming, because this process is supported at the file level by all operating systems as an atomic action. For unexplained reasons, however, semaphore files are preferred to solve the problem, although one has to handle two files. 
+</p>
+<p>
+In addition, with VPN and D2D [D2D] which are only in use in Germany other alternatives exists.
+</p>
+<h3>
+2.1.7. Profiles
+</h3>
+<p>
+The standard itself is the union of all the requirements of all manufacturers/vendors involved in the development of standards. Because such requirements can not be declared as mandatory, many elements are optional, i.e. they need not be provided. This approach allows a broad acceptance of standards, but this in turn also leads to the fact that different manufacturers provide different data so that data exchange is limited despite adherence to the same standard. 
+</p>
+<p>
+To resolve this dilemma, message profiles are introduced. 
+There are three different levels: 
+</p>
+<ul>
+<li>standard
+<li>constrainable (=to be limited)
+<li>implementable (=implemented)
+</ul>
+<p>
+The top level represents the standard itself, i.e. it has the biggest amount of optionalities. For a "constrainable profile" optionalities are somewhat limited already. However, some choices still exist which are eliminated with "implementable profiles". For each information item a statement must be provided whether it is supported or not. 
+</p>
+<p>
+The standard clearly defines, what can be done with the various optionalities to come to an "implementable profile": 
+</p>
+<p>
+Table 2: "HL7 Optionality and Conformance Usage"
+</p>
+<table border=1>
+<tr bgcolor="lightgrey">
+<td>HL7 Optionality</td><td>Allowed Conformance Usage</td><td>Comment</td>
+</tr>
+<tr>
+<td>R - Required</td><td>R</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>RE - Required, but may be Empty</td><td>R</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>O - Optional</td><td>R, RE, O, C, CE, X</td><td>can be constrained to any other, but O is only permitted for constrainable profiles</td>
+</tr>
+<tr>
+<td>C - Conditional</td><td>C, R</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>CE - Conditional, but may be empty</td><td>C, CE, R</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>X - Not Supported</td><td>X</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>B - Backward Compatibility</td><td>R, RE, O, C, CE, X</td><td>can be constrained to any other, but O is only permitted for constrainable definitions<br/>X is the prefered one</td>
+</tr>
+<tr>
+<td>W - Withdrawn</td><td>R, RE, O, C, CE, X</td><td>X is the prefered one</td>
+</tr>
+</table>
+<p>
+In an implementable message profile, ultimately only two possibilities are allowed: Either a specific element is supported (= "R / RE") or not (= "X"). This results in the subsequent conversion chart. The only special feature presented here represent the elements that play a role in those conditions. But again, for an implementable profile an exact statement requested [OemBlo2007b]: 
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-04-en.gif"><br/>
+Figure 4: Hierarchy for restricting profiles
+</p>
+<p>
+As of version 2.7 "RE" will also be allowed / used in the standard. 
+</p>
+<h2>
+2.2. HL7 Version 3 - Detailed Insight
+</h2>
+<p>
+An entirely different approach is established for "new" HL7 Version 3: in 1995 the first attempt was made to create a globally valid model for healthcare. After three years of work one had to admit that such a model if at all is hard to define because the requirements of the different domains and different countries do not permit a harmonization. 
+</p>
+<p>
+Instead, they came to a metamodel, called (= RIM Reference Information Model) [HL7 RIM]. One can regard it as a toolbox, the elements of which can be used for the construction of domain models. This RIM itself only consist of four base classes and two more classes for relationships. (A good explanation of how to read it can be found next to the Guide V2 also in [Hinch]): 
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-05-en.gif"><br/>
+Figure 5: HL7 V3 RIM base classes
+</p>
+<p>
+The entire reference model (herein after RIM 0208) includes the base classes and their specializations, in a print-optimized version: 
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-06.png" width="90%"><br/>
+Figure 6: HL7 V3 RIM (Reference Information Model)
+</p>
+<p>
+In addition there are special classes that are necessary for the generation of messages, management of queries, languages and overall control. They are not relevant for further consideration in this work: 
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-07.png"><br/>
+Figure 7: HL7 V3 classes for the control of the message exchange
+</p>
+<p>
+These six basic classes (Figure 5) consist of four base classes and two relationship classes:
+</p>
+<p>
+An entity is the representation of physical, persistent objects. Beside persons, materials and equipment also organizations and places belongs here. An entity expresses a static thing.
+</p>
+<p>
+A role (role) expresses the ability that an entity has.
+For example, a person may play the role of patient. 
+</p>
+<p>
+A participation describes the incorporation of an entity into a certain role in one act. For example, a person in the role of physician participates in a surgery activity as the executive surgeon.
+</p>
+<p>
+An act the carrier for all information and expresses changes. For example, a finding is an observation and hence an activity. In addtion to these four base classes two classes are provided in order to realize relationships:
+</p>
+<p>
+A role link is a direct relationship in various roles such as employer / employee. However, this is used very rarely. 
+</p>
+<p>
+An act relationship combines various activities. For example, the activity of observing is the fulfillment of the activity order. 
+</p>
+<p>
+These six base classes can be put together in an instantiation in myriad ways. For example the following construct represents that "person A" participates as a physician in an examination of the patient "person B".
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-08-en.gif"><br/>
+Figure 8: HL7 V3 Example 1 (simple activity)
+</p>
+<p>
+The two link classes below are the direct linkage of roles and activities. For example, here is Mr. Meier employed by the company Kunze.
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-09-en.gif"><br/>
+Figure 9: HL7 V3 Example 2 ("Role Relationship")
+</p>
+<p>
+Similarly, two different activities - for example, the request and the corresponding result - are linked by an act relationship.
+</p>
+
+<p align="center">
+<img src="images/app2-abb2-10-en.gif"><br/>
+Figure 10: HL7 V3 Example 3 ("Act Relationship")
+</p>
+<p>
+Another speciality are the different relationships of roles related to entities. The following graph represents this as indicated by the solid and the dashed line. It is assumed that a role requires a certain context. Thus, a person becomes a patient only in the context of an organization (in this case a hospital). 
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-11-en.gif"><br/>
+Figure 11: HL7 V3 Example 4 ("Playing and scoping Entity")
+</p>
+<p>
+The different options for creating relationships as shown in the four examples above can be (arbitrarily) combined into more complex structures. Out of these classes (components of the toolbox) so-called domain models are constructed. For this purpose, a module for Microsoft Visio (TM) is added which considers the RIM - the necessary meta-information is stored in  an Access database -  and can validate the used classes directly: 
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-12.png" width="90%"><br/>
+Figure 12: HL7 V3 sample domain model
+</p>
+<p>
+A domain model is an (abstract) structure of classes that are required for modeling an application domain. 
+</p>
+<p>
+This domain model is taken and parts of it are constrained for their use. This leads to a so-called Refined Message Information Model (R-MIM), which serves to implement a particular scenario (use case). 
+</p>
+<p>
+Another limitation with regard to a particular message in this scenario, including the associated sequencing for transmission of this information in the form of a message, leads to a Hierarchical Message Definition (HMD). Such a definition can be both displayed in tabular form or an XML schema. Both are the basis for an implementation. The ITS - Implementable Technology Specification - then allows for and ensures the implementation of abstract models in a specific technology such as XML. 
+</p>
+<p>
+Apart from these abstract models and their details for an implementation two other areas are important. 
+</p>
+
+<p align="center">
+<img src="images/app2-abb2-13-en.gif"><br/>
+Figure 13: HL7 V3 Implementation Issues
+</p>
+<p>
+The foundations for this are explained in more detail in subsequent sections.
+</p>
+<h3>
+2.2.1. State Transitions
+</h3>
+<p>
+One reason to send a message is the change of an internal state of an entity or an activity. For this purpose, the generic state transitions that will be implemented in the form of state machines have been defined. In the various scenarios subsets of these generic definition of events are specified and communicated by messages. 
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-14.png"><br/>
+Figure 14: State Machine for HL7 V3 Acts
+</p>
+<p>
+The state transitions for activities (see above) are different from those of entities (see below).
+</p>
+ 
+<p align="center">
+<img src="images/app2-abb2-15.gif"><br/>
+Figure 15: State Machine for HL7 V3 entities
+</p>
+<p>
+2.2.2. Mood-Code
+</p>
+<p>
+A totally different dimension is realized by the so-called mood code. (The technical term is best translated by "mode".) This refers to the use of abstract classes (entities and activities) in different functions. As such, an observation in the "Request" Mood is something different than an observation in the "Event" Mood. The former is the order, the latter the result. 
+</p>
+<p>
+Ontologically speaking, this should be represented in different subtrees of the hierarchy. For the automatic generation of the structures this cannot be realized, however. Conversely, these are generally to information objects whose semantics are accessible only through the combination of different attributes. For a mapping this must be taken into account by conditions.
+</p>
+<h3>
+2.2.3. Application Roles
+</h3>
+<p>
+As already explained in the introduction, the messages are exchanged as the interaction between different actors. The trigger for the exchange of messages is either an event or a state change. Sometimes it is not done with the exchange of a single message: several messages together form a specific scenario which can only adequately be represented in a system by considering all associated messages. 
+</p>
+<p>
+At this point this is an enhancement over version 2.x, which does have such a construct and therefore specify all messages without any relationship to each other.
+</p>
+<p>
+However, an "application role" is a non-normative construct, i.e. in this case that there is no uniform understanding of the responsibilities in this regard. It is not clear on what basis and what conditions application roles are specified and what should be considered when implementing the static and dynamic behavior. 
+</p>
+<h3>
+2.2.4. Data Types
+</h3>
+<p>
+An essential prerequisite for an exchange of messages is data. These are often presented as a single unit of several individual values that have a common connection - such as an address, which consists of road, zip code and city. Such a conglomeration of individual information is referred to as a data type in programming languages. Quite often they have operations that can be performed on these data types. The data type "integer" for example has the operations "predecessor"  and "successor".
+</p>
+<p>
+The semantic properties of these data types is expressed by "invariant statements". These are statements that are valid at any time and for all possible values. (In other areas of information science (computability and logic), such statements are regarded as fix points.) 
+</p>
+<h3>
+2.2.5. ITS
+</h3>
+<p>
+This data type specification is defined on an abstract level, independent of a specific implementation. The same applies to domain models. For usage in a practical scenario a specific technology must be selected and mapping rules defined. 
+</p>
+<p>
+For HL7 V3 currently only XML and UML are approved as technologies and provided in the form of a so-called ITSs (implementable Technology Specifications). 
+</p>
+<p>
+There are also other possible technologies. These include binary XML [XML], ASN.1 [ASN.1] and ER7. The latter requires a revision, because it currently does not allow for arbitrarily deeply nested structures.
+</p>
+<p>
+In March 2010 a new proposal was submitted to further define an XML ITS, which uses the name of the RIM classes directly and not the ones out of the domain model, so as to address the problem of backward compatibility. Thus the proposal of the author, which was presented at the 2009 IHIC is picked up - more or less unconsciously. The same applies to greenCDA.
+</p>
+<h3>
+2.2.6. "Structural Attributes"
+</h3>
+<p>
+The classes in the abstract models contain information which is  absolutely necessary for a correct interpretation of a specific message instance. The RIM provides for the modeling of domains abstract classes that can then be instantiated accordingly. Since these classes can be used multiple times in different forms, this shall be indicated for the correct understanding. The necessary attributes such as "mood code" and "class code" are therefore called "structural attributes". 
+</p>
+<h3>
+2.2.7. "mandatory Values"
+</h3>
+<p>
+Closely associated with this structural attribute is the presence of valid values. This means that a replacement of this information with the reasons for the absence of such data ("asked, but no response") are not permitted. This includes the possibility default values as well. However, as some vendors manipulates the XML schemas, default values are very problematic, since they must be known for evaluation. Therefore, for each transmission the associated schema should be communicated in parallel, so that the data volume ("traffic") increases significantly. 
+</p>
+<h3>
+2.2.8. "Null-Flavors"
+</h3>
+<p>
+A notable difference between version 3 to version 2 is the fact that information about the absence of data is not mixed with the data. So there is no valid "data code" for "unknown". The table below shows an example: 
+</p>
+<p>
+Table 3: Coding Example "Administrative Gender"
+</p>
+<table border="1">
+<tr bgcolor="lightgrey">
+<td>V2.x</td><td>V3</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>M - Male</td><td>M -Male</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>F - Female</td><td>F - Female	</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>A - Ambiguous</td><td>UN - undifferentiated</td><td>&nbsp;</td>
+</tr>
+<tr>
+<td>N - Not applicable</td><td>&nbsp;</td><td>not used with persons in V3</td>
+</tr>
+<tr>
+<td>O - Other</td><td>&nbsp;</td><td>not used with persons in V3</td>
+</tr>
+<tr>
+<td>U - Unknown</td><td>nullFlavor="NI" - no information</td><td>&nbsp;</td>
+</tr>
+</table>
+<p>
+Hence the applications have the possibility to select from a dozen different reasons for the absence of information on the one hand. On the other, this type of information must be stored in the application in order to be able to communicate this at all.
+</p>
+<h3>
+2.2.9. Publishing
+</h3>
+<p>
+Another point that has been learned from the publication process of version 2 is the way in which to edit the information. Nowadays, there are no longer proprietary formats such as MS-Word in use. The information is stored in databases and XML documents. 
+</p>
+<p>
+A distinction must be made between text documents and model-specific information. The former are edited in XML documents obeying to given structures (XML schema). The model-specific information is stored with reference to the respective Artefact code into a set of database tables. The models are referenced by the same Artefact code (as a file name).
+</p>
+<p>
+Based on this information, the documents to be published are generated in an HTML representation and hyperlinked. To ensure the correct linking of that information from various databases which independantly maintained by the individual working groups, they are merged in advance. 
+</p>
+<p>
+In the future, a shift towards the MIF files can be expected.
+</p>
+
+ 
+<div class="separator">
+&nbsp;</div>
+
+<p align=center>
+<big>
+<font color="#0000FF">
+Last Update: September 22, 2010
+</font>
+</big>
+</p>
+
+</body>
+</html>
